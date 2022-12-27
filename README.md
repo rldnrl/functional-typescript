@@ -43,6 +43,40 @@ const entries = map.entries();
 const iteratorEntries = entries[Symbol.iterator]();
 ```
 
+### 사용자 정의 이터러블
+
+```ts
+const iterable = {
+  [Symbol.iterator]() {
+    let i = 3;
+    return {
+      next() {
+        return i === 0 ? { done: true } : { value: i--, done: false }
+      },
+      [Symbol.iterator]() { return this }
+    }
+  }
+}
+
+const iterator = iterable[Symbol.iterator]();
+
+for (const element of iterable) {
+  console.log(element) // 3, 2, 1
+}
+
+for (const element of iterator) {
+  console.log(element) // 3, 2, 1
+}
+
+const arr = [1, 2, 3];
+const iteratorArray = arr[Symbol.iterator]();
+
+for (const element of iteratorArray) {
+  console.log(element) // 1, 2, 3
+  console.log(iteratorArray[Symbol.iterator]() == iteratorArray) // true
+}
+```
+
 ## 개발하는 방식
 1. type을 먼저 정의합니다.
 2. 타입에 맞춰 코드를 작성합니다.
