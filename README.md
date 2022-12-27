@@ -44,6 +44,8 @@ const iteratorEntries = entries[Symbol.iterator]();
 ```
 
 ### 사용자 정의 이터러블
+- `Symbol.iterator` 함수를 가진 객체. `next()`를 포함한 객체를 반환한다.
+- `next()`는 `{ value, done }`을 리턴하는 함수
 
 ```ts
 const iterable = {
@@ -75,6 +77,17 @@ for (const element of iteratorArray) {
   console.log(element) // 1, 2, 3
   console.log(iteratorArray[Symbol.iterator]() == iteratorArray) // true
 }
+```
+
+### 전개 연산자
+- 전개 연산작도 이터러블/이터러블에서만 사용할 수 있다.
+
+```ts
+const arr = [1, 2, 3];
+const set = new Set([1, 2, 3])
+const map = new Map([['a', 1], ['b', 2], ['c', 3]])
+
+const answer = [...arr, ...set, ...map, ...map.keys(), ...map.values(), ...map.entries()]
 ```
 
 ## 개발하는 방식
