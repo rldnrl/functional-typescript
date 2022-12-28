@@ -90,6 +90,28 @@ const map = new Map([['a', 1], ['b', 2], ['c', 3]])
 const answer = [...arr, ...set, ...map, ...map.keys(), ...map.values(), ...map.entries()]
 ```
 
+## 제너레이터
+- 이터레이터이자 이터러블을 생성하는 함수
+
+```ts
+function *gen() {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+
+const iter = gen();
+iter[Symbol.iterator]() === iter // true
+iter.next() // { value: 1, done: false }
+iter.next() // { value: 2, done: false }
+iter.next() // { value: 3, done: false }
+iter.next() // { value: undefined, done: true }
+
+for (const element of gen()) {
+  console.log(element); // 1, 2, 3
+}
+```
+
 ## 개발하는 방식
 1. type을 먼저 정의합니다.
 2. 타입에 맞춰 코드를 작성합니다.
