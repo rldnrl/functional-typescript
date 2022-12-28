@@ -1,10 +1,12 @@
-type SortBy = <T extends object>(property: keyof T) => (a: T, b: T) => number;
+type SortBy = <T extends object>(
+  property: keyof T
+) => (a: T, b: T) => 1 | 0 | -1;
 
 /**
- * 
+ *
  * @param property Object Property
  * @returns -1 | 0 | 1
- * 
+ *
  * @example
  * ```ts
  * const people = [
@@ -15,7 +17,7 @@ type SortBy = <T extends object>(property: keyof T) => (a: T, b: T) => number;
  *
  * people.sort(sortBy("lastName"))
  * ```
- * 
+ *
  * @result
  * ```ts
  * [
